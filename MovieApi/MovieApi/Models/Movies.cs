@@ -17,7 +17,7 @@ namespace MovieApi.Models
         [Display(Name = "Genre")]
         public string genre { get; set; }
 
-        [Display(Name = "Director Name"]
+        [Display(Name = "Director Name")]
 
         public string director { get; set; }
     }
