@@ -9,7 +9,7 @@ using System.Web.Http;
 
 namespace MoviesApi.Controllers
 {
-    [Authorize]
+    [AllowCrossSite]
     public class ValuesController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -17,38 +17,51 @@ namespace MoviesApi.Controllers
         [HttpGet]
         public IHttpActionResult Get()
         {
-            List<Movies> movieList = new List<Movies>();
-            db.Movies.AddOrUpdate(
-            new Movies { Title = "The Departed", Genre = "Drama", DirectorName = "Martin Scorsese" },
-            new Movies { Title = "The Dark Knight", Genre = "Drama", DirectorName = "Christopher Nolan" },
-            new Movies { Title = "Inception", Genre = "Drama", DirectorName = "Christopher Nolan" },
-            new Movies { Title = "Pineapple Express", Genre = "Comedy", DirectorName = "David Gordon Green" },
-            new Movies { Title = "Die Hard", Genre = "Action", DirectorName = "John McTiernan" }
-            );
-            db.SaveChanges();
-
-            return Ok(1);
+            List<Movies> movieList = db.Movies.ToList();
+            return Ok(movieList);
         }
 
-        // GET api/values/5
-        public string Get(int id)
+        // details read
+        [HttpGet]
+        public IHttpActionResult Get(int id)
         {
-            return "value";
+            Movies movie = db.Movies.Find(id);
+            if (movie == null)
+            {
+                return NotFound();
+            }
+            return Ok(movie);
         }
 
-        // POST api/values
-        public void Post([FromBody]string value)
+        // create
+        [HttpPost]
+        public IHttpActionResult Post([FromBody]Movies movies)
         {
+            db.Movies.Add(movies);
+            return Ok();
         }
 
-        // PUT api/values/5
-        public void Put(int id, [FromBody]string value)
-        {
+        //edit update
+        [HttpPut]
+        public IHttpActionResult Put(int id)
+        {            
+            Movies movie = db.Movies.Find(id);
+            if (movie == null)
+            {
+                return NotFound();
+            }
+            return Ok(movie);
         }
 
-        // DELETE api/values/5
-        public void Delete(int id)
+        //delete
+        [HttpDelete]
+        public IHttpActionResult Delete(int id)
         {
+            Movies movie = db.Movies.Find(id);
+            db.Movies.Remove(movie);
+            //db.SaveChanges(); is necessary to save?
+
+            return Ok();
         }
     }
 }

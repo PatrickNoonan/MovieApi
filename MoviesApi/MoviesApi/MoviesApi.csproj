@@ -206,6 +206,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AllowCrossSiteAttribute.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -218,6 +219,10 @@
     <Compile Include="Migrations\201906112015051_thing3.cs" />
     <Compile Include="Migrations\201906112015051_thing3.Designer.cs">
       <DependentUpon>201906112015051_thing3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906112207558_databaseSeed.cs" />
+    <Compile Include="Migrations\201906112207558_databaseSeed.Designer.cs">
+      <DependentUpon>201906112207558_databaseSeed.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -323,6 +328,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906112015051_thing3.resx">
       <DependentUpon>201906112015051_thing3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906112207558_databaseSeed.resx">
+      <DependentUpon>201906112207558_databaseSeed.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
