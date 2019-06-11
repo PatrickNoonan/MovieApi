@@ -12,33 +12,23 @@ namespace MoviesApi.Controllers
     [Authorize]
     public class ValuesController : ApiController
     {
-        ApplicationDbContext context;
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         [HttpGet]
         public IHttpActionResult Get()
         {
-            List<Models.Movies> movieList = new List<Models.Movies>();
-            context.Movies.AddOrUpdate(
-            new Models.Movies { Title = "The Departed", Genre = "Drama", DirectorName = "Martin Scorsese" },
-            new Models.Movies { Title = "The Dark Knight", Genre = "Drama", DirectorName = "Christopher Nolan" },
-            new Models.Movies { Title = "Inception", Genre = "Drama", DirectorName = "Christopher Nolan" },
-            new Models.Movies { Title = "Pineapple Express", Genre = "Comedy", DirectorName = "David Gordon Green" },
-            new Models.Movies { Title = "Die Hard", Genre = "Action", DirectorName = "John McTiernan" });
-            return Ok(movieList);
-        }
+            List<Movies> movieList = new List<Movies>();
+            db.Movies.AddOrUpdate(
+            new Movies { Title = "The Departed", Genre = "Drama", DirectorName = "Martin Scorsese" },
+            new Movies { Title = "The Dark Knight", Genre = "Drama", DirectorName = "Christopher Nolan" },
+            new Movies { Title = "Inception", Genre = "Drama", DirectorName = "Christopher Nolan" },
+            new Movies { Title = "Pineapple Express", Genre = "Comedy", DirectorName = "David Gordon Green" },
+            new Movies { Title = "Die Hard", Genre = "Action", DirectorName = "John McTiernan" }
+            );
+            db.SaveChanges();
 
-        //[HttpGet]
-        //public IEnumerable<Models.Movies> Get()
-        //{
-        //    List<Models.Movies> movieList = new List<Models.Movies>();
-        //    context.Movies.AddOrUpdate(
-        //    new Models.Movies { Title = "The Departed", Genre = "Drama", DirectorName = "Martin Scorsese" },
-        //    new Models.Movies { Title = "The Dark Knight", Genre = "Drama", DirectorName = "Christopher Nolan" },
-        //    new Models.Movies { Title = "Inception", Genre = "Drama", DirectorName = "Christopher Nolan" },
-        //    new Models.Movies { Title = "Pineapple Express", Genre = "Comedy", DirectorName = "David Gordon Green" },
-        //    new Models.Movies { Title = "Die Hard", Genre = "Action", DirectorName = "John McTiernan" }
-        //    return movieList;
-        //}
+            return Ok(1);
+        }
 
         // GET api/values/5
         public string Get(int id)
