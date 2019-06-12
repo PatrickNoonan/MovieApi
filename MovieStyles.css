@@ -1,0 +1,41 @@
+body {
+    background: linear-gradient(90deg, #5f2c82 10%, #49a09d 90%);
+  }
+
+.search-box {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+img {
+    height:150px;
+}
+
+.info-list {
+    text-align: center;
+}
+
+#user-search {
+    width: 450px;
+    border: solid 5px;
+    border-color: #4971a0;
+}
+
+.object-row {
+    margin-top: 15px;
+    word-wrap: break-word;
+    height: 100px;
+}
+
+.movieSearch {
+    margin-top: 100px;
+}
+
+.Movie-image {
+    margin-top: 100px;
+    text-align: center;
+}
+
+#film-icon {
+    width: 100px;
+  }
