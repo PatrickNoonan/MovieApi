@@ -32,36 +32,45 @@ namespace MoviesApi.Controllers
 
 
         // details read
-        [HttpGet]
-        public IHttpActionResult Get(string option, string userString)
-        {
-            Movies movie = new Movies();
-            if (option == "Title")
-            {
-                movie = db.Movies.First(m => m.Title == userString);
-            }
-            else if (option == "Genre")
-            {
-                movie = db.Movies.First(m => m.Genre == userString);
-            }
-            else if (option == "Director Name")
-            {
-                movie = db.Movies.First(m => m.DirectorName == userString);
-            }
+        //[HttpGet]
+        //public IHttpActionResult Get(string option, string userString)
+        //{
+        //    Movies movie = new Movies();
+        //    if (option == "Title")
+        //    {
+        //        movie = db.Movies.First(m => m.Title == userString);
+        //    }
+        //    else if (option == "Genre")
+        //    {
+        //        movie = db.Movies.First(m => m.Genre == userString);
+        //    }
+        //    else if (option == "Director Name")
+        //    {
+        //        movie = db.Movies.First(m => m.DirectorName == userString);
+        //    }
 
-            if (movie == null)
-            {
-                return NotFound();
-            }
+        //    if (movie == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return Ok(movie);
-        }
+        //    return Ok(movie);
+        //}
 
         // create
         [HttpPost]
-        public IHttpActionResult Post([FromBody]Movies movies)
+        public IHttpActionResult Post([FromBody]Movies newMovie)
         {
-            db.Movies.Add(movies);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Invalid data.");
+            }
+            var movie = new Movies();
+            movie.Title = newMovie.Title;
+            movie.Genre = newMovie.Genre;
+            movie.DirectorName = newMovie.DirectorName;
+            db.Movies.Add(movie);
+            db.SaveChanges();
             return Ok();
         }
 
@@ -77,30 +86,30 @@ namespace MoviesApi.Controllers
             return Ok(movie);
         }
 
-        [HttpPut]
-        public IHttpActionResult Put([Bind(Include = "Id,firstName,lastName,emailAddress,address,zipCode,weeklyPickupDay,specialOneTimePickup")] Customer customer)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(customer).State = EntityState.Modified;
-                string currentId = User.Identity.GetUserId();
-                customer.UserId = currentId;
-                db.SaveChanges();
+        //[HttpPut]
+        //public IHttpActionResult Put([Bind(Include = "Id,firstName,lastName,emailAddress,address,zipCode,weeklyPickupDay,specialOneTimePickup")] Customer customer)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(customer).State = EntityState.Modified;
+        //        string currentId = User.Identity.GetUserId();
+        //        customer.UserId = currentId;
+        //        db.SaveChanges();
 
-                return RedirectToAction("Index");
-            }
-            return View(customer);
-        }
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(customer);
+        //}
 
         //delete
-        [HttpDelete]
-        public IHttpActionResult Delete(int id)
-        {
-            Movies movie = db.Movies.Find(id);
-            db.Movies.Remove(movie);
-            //db.SaveChanges(); is necessary to save?
+        //[HttpDelete]
+        //public IHttpActionResult Delete(int id)
+        //{
+        //    Movies movie = db.Movies.Find(id);
+        //    db.Movies.Remove(movie);
+        //    //db.SaveChanges(); is necessary to save?
 
-            return Ok();
-        }
+        //    return Ok();
+        //}
     }
 }

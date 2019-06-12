@@ -96,19 +96,30 @@ $(document).ready(function () {
         let newGenreInput = $("#newGenreInput").val();
         let newDirectorInput = $("#newDirectorInput").val();
         $.ajax({
-            method: "GET",
-            url: "http://localhost:44378/api/values",
-            dataType: "JSON"
-        })
-            .done(function (data) {
-                console.log(data);
-                $.each(data, function (key, value) {
-                    if (value.DirectorName == searchDirectorInput) {
-                        $("#info-list")
-                            .append(`<div class="row object-row"><div class="col-3"><button id="movie-edit"><i class="fas fa-film"></i></button></div>` + "<div class='col-3'>" + value.Title + "</div><div class='col-3'>" + value.Genre + "</div><div class='col-3'>" + value.DirectorName + "</div>")
-                    };
-                });
-            })
+			type: 'POST',
+			url: 'http://localhost:44378/api/values',
+			crossDomain: true,
+			headers: {
+				"Content-Type": "application/json"
+			},
+			data: JSON.stringify({
+                "Title": newTitleInput,
+				"Genre": newGenreInput,
+				"DirectorName": newDirectorInput,
+			}),
+			datatype: 'json',
+			success: function(data){
+				console.log(data);
+			}
+		})
+            // .done(function (data) {
+            //     $.each(data, function (key, value) {
+            //         if (value.DirectorName == searchDirectorInput) {
+            //             $("#info-list")
+            //                 .append(`<div class="row object-row"><div class="col-3"><button id="movie-edit"><i class="fas fa-film"></i></button></div>` + "<div class='col-3'>" + value.Title + "</div><div class='col-3'>" + value.Genre + "</div><div class='col-3'>" + value.DirectorName + "</div>")
+            //         };
+            //     });
+            // })
     });
 
 });
