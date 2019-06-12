@@ -21,6 +21,12 @@ img {
     border-color: #4971a0;
 }
 
+#user-add {
+    width: 200px;
+    border: solid 5px;
+    border-color: #4971a0;
+}
+
 .object-row {
     margin-top: 15px;
     word-wrap: break-word;
