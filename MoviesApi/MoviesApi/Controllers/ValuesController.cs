@@ -6,9 +6,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace MoviesApi.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     [AllowCrossSite]
     public class ValuesController : ApiController
     {
@@ -20,6 +22,14 @@ namespace MoviesApi.Controllers
             List<Movies> movieList = db.Movies.ToList();
             return Ok(movieList);
         }
+
+        [HttpGet]
+        public IHttpActionResult Get(int id)
+        {
+            Movies movie = db.Movies.Find(id);
+            return Ok(movie);
+        }
+
 
         // details read
         [HttpGet]
@@ -57,7 +67,7 @@ namespace MoviesApi.Controllers
 
         //edit update
         [HttpPut]
-        public IHttpActionResult Put(int id)
+        public IHttpActionResult Put(int id, [FromBody] Movies movies)
         {            
             Movies movie = db.Movies.Find(id);
             if (movie == null)
@@ -65,6 +75,21 @@ namespace MoviesApi.Controllers
                 return NotFound();
             }
             return Ok(movie);
+        }
+
+        [HttpPut]
+        public IHttpActionResult Put([Bind(Include = "Id,firstName,lastName,emailAddress,address,zipCode,weeklyPickupDay,specialOneTimePickup")] Customer customer)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(customer).State = EntityState.Modified;
+                string currentId = User.Identity.GetUserId();
+                customer.UserId = currentId;
+                db.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+            return View(customer);
         }
 
         //delete
