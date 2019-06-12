@@ -1,37 +1,44 @@
-// $(document).ready(function () {  
-//     $("#Submit").click(function () {  
-//         var movie = new Object();  
-//         movie.Title = $('#title').val();  
-//         person.Genre = $('#genre').val();  
-//         person.DirectorName = $('#directorName').val();  
-
-
-
-//         $.ajax({  
-//             url: 'http://localhost:44378/api/movies',
-//             type: 'Get',  
-//             dataType: 'json',  
-//             data: movie,  
-//             success: function (data, textStatus, xhr) {  
-//                 console.log(data);  
-//             },  
-//             error: function (xhr, textStatus, errorThrown) {  
-//                 console.log('Error in Operation');  
-//             }  
-//         });  
-//     });  
-// }); 
-
 $(document).ready(function () {
+    $("#displayAll").on("click", function () {
+        //.remove all things that were appended
+        var movie = new Object();
+        movie.Title = $('#title').val();
+        movie.Genre = $('#genre').val();
+        movie.DirectorName = $('#directorName').val();
 
-    $("button").on("click", function () {
+        $.ajax({
+            method: "GET",
+            url: "https://localhost:44378/api/values",
+            dataType: "JSON"
+        })
+            .done(function (data) {
+                console.log(data);
+                $.each(data, function (key, value) {
+                    $("#info-list")
+                        .append(`<div class="row object-row"><div class="col-3"><button id="movie-edit"><i class="fas fa-film"></i></button></div>` + "<div class='col-3'>" + value.Title + "</div><div class='col-3'>" + value.Genre + "</div><div class='col-3'>" + value.DirectorName + "</div>")
+
+                    $("#movie-edit").on("click", function () {
+                        //PUT METHOD
+                        let movieId = value.Id;
+                        $.ajax({
+                            method: "PUT",
+                            url: "https://localhost:44378/api/values/" + movieId,
+                            dataType: "JSON"
+                        })
+                            .done(function (data) {
+                                // console.log(data);
+                                // $.each(data, function (key, value) {
+                                //     $("#info-list")                        
+                                //         .append(`<div class="row object-row"><div class="col-3"><button id="move-edit"><i class="fas fa-film"></i></button></div>` + "<div class='col-3'>" + value.Title + "</div><div class='col-3'>" + value.Genre + "</div><div class='col-3'>" + value.DirectorName + "</div>")
+                                // });
+                            })
+                    });
+                })
+            });
+    });
+
+    $("#title-icon").on("click", function () {
         let searchTitleInput = $("#user-search").val();
-
-        var movie = new Object();  
-        movie.Title = $('#title').val();  
-        movie.Genre = $('#genre').val();  
-        movie.DirectorName = $('#directorName').val(); 
-
         $.ajax({
             method: "GET",
             url: "https://localhost:44378/api/values",
@@ -41,28 +48,83 @@ $(document).ready(function () {
             .done(function (data) {
 
                 console.log(data);
-                /*
-                let albumCover = data[0].artworkUrl100;
-                let artistName = data[0].artistName;
-                let songName = data[0].trackName;
-                let songPreview = data[0].previewUrl
-                */
 
-                //$("#info-list").append(`<div class="col-2"><h3>Album Cover</h3></div><div class='col-2'><h3>Artist</h3></div><div class='col-2'><h3>Song</h3></div><div class='col-4'><h3>Album Name</h3></div><div class='col-2'><h3>Song Preview</h3></div>`);
+                // for (let i = 0; i < data.length; i++){
+                //     if (data[i].Title == searchTitleInput) {
+                //         $("#info-list")
+                //             .append(`<div class="row object-row"><div class="col-3"><button id="movie-edit"><i class="fas fa-film"></i></button></div>` + "<div class='col-3'>" + value.Title + "</div><div class='col-3'>" + value.Genre + "</div><div class='col-3'>" + value.DirectorName + "</div>")
+                //     };
+                // }
 
                 $.each(data, function (key, value) {
-
-                    $("#info-list")
-                        // .append(`<div class="row object-row"><div class="col-2"><img src="${value.artworkUrl100}"></div>` + "<div class='col-2'>" + value.artistName + "</div><div class='col-2'>" + value.trackName + "</div><div class='col-4'>" + value.collectionName + "</div><div class='col-2'><audio controls='controls'><source src='" + value.previewUrl + `' type="audio/mpeg"></audio></div></div>`)
-                        // .append(`<div class="row object-row"><div class="col-2"><img src="${value.artworkUrl100}"></div>` + "<div class='col-2'>" + value.title + "</div><div class='col-2'>" + value.genre + "</div><div class='col-4'>" + value.DirectorName + "</div><div class='col-2'><audio controls='controls'><source src='" + value.previewUrl + `' type="audio/mpeg"></audio></div></div>`)
-                        .append(`<div class="row object-row"><div class="col-3">` + value.Id + `</div>` + "<div class='col-3'>" + value.Title + "</div><div class='col-3'>" + value.Genre + "</div><div class='col-3'>" + value.DirectorName + "</div>")
+                    if (value.Title == searchTitleInput) {
+                        $("#info-list")
+                            .append(`<div class="row object-row"><div class="col-3"><button id="movie-edit"><i class="fas fa-film"></i></button></div>` + "<div class='col-3'>" + value.Title + "</div><div class='col-3'>" + value.Genre + "</div><div class='col-3'>" + value.DirectorName + "</div>")
+                    };
                 });
             })
+    })
+});
 
-            .fail(function () {
-                console.log("fail");
-                $(".movieSearch").append("<p>search failed, try again</p>")
-            });
+$("#genre-icon").on("click", function () {
+    let searchGenreInput = $("#user-search").val();
 
-    });
+    $.ajax({
+        method: "GET",
+        url: "https://localhost:44378/api/values",
+        dataType: "JSON"
+    })
+
+        .done(function (data) {
+
+            console.log(data);
+
+            for (let i = 0; i < data[0].length; i++){
+                if (data[0][i].Genre == searchGenreInput) {
+                    $("#info-list")
+                        .append(`<div class="row object-row"><div class="col-3"><button id="movie-edit"><i class="fas fa-film"></i></button></div>` + "<div class='col-3'>" + value.Title + "</div><div class='col-3'>" + value.Genre + "</div><div class='col-3'>" + value.DirectorName + "</div>")
+                };
+            }
+
+            // $.each(data, function (key, value) {
+            //     if (value.Title == searchTitleInput) {
+            //         $("#info-list")
+            //             .append(`<div class="row object-row"><div class="col-3"><button id="movie-edit"><i class="fas fa-film"></i></button></div>` + "<div class='col-3'>" + value.Title + "</div><div class='col-3'>" + value.Genre + "</div><div class='col-3'>" + value.DirectorName + "</div>")
+            //     };
+            // });
+        })
+});
+
+$("#director-icon").on("click", function () {
+    let searchDirectorInput = $("#user-search").val();
+
+    var movie = new Object();
+    movie.Title = $('#title').val();
+    movie.Genre = $('#genre').val();
+    movie.DirectorName = $('#DirectorName').val();
+
+    $.ajax({
+        method: "GET",
+        url: "https://localhost:44378/api/values",
+        dataType: "JSON"
+    })
+
+        .done(function (data) {
+
+            console.log(data);
+
+            for (let i = 0; i < data[0].length; i++){
+                if (data[0][i].DirectorName == searchDirectorInput) {
+                    $("#info-list")
+                        .append(`<div class="row object-row"><div class="col-3"><button id="movie-edit"><i class="fas fa-film"></i></button></div>` + "<div class='col-3'>" + value.Title + "</div><div class='col-3'>" + value.Genre + "</div><div class='col-3'>" + value.DirectorName + "</div>")
+                };
+            }
+
+            // $.each(data, function (key, value) {
+            //     if (value.Title == searchTitleInput) {
+            //         $("#info-list")
+            //             .append(`<div class="row object-row"><div class="col-3"><button id="movie-edit"><i class="fas fa-film"></i></button></div>` + "<div class='col-3'>" + value.Title + "</div><div class='col-3'>" + value.Genre + "</div><div class='col-3'>" + value.DirectorName + "</div>")
+            //     };
+            // });
+        })
 });

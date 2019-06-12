@@ -23,13 +23,27 @@ namespace MoviesApi.Controllers
 
         // details read
         [HttpGet]
-        public IHttpActionResult Get(int id)
+        public IHttpActionResult Get(string option, string userString)
         {
-            Movies movie = db.Movies.Find(id);
+            Movies movie = new Movies();
+            if (option == "Title")
+            {
+                movie = db.Movies.First(m => m.Title == userString);
+            }
+            else if (option == "Genre")
+            {
+                movie = db.Movies.First(m => m.Genre == userString);
+            }
+            else if (option == "Director Name")
+            {
+                movie = db.Movies.First(m => m.DirectorName == userString);
+            }
+
             if (movie == null)
             {
                 return NotFound();
             }
+
             return Ok(movie);
         }
 

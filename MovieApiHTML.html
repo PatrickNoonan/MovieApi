@@ -1,7 +1,3 @@
-<!-- <table id="movieTable">
-    <tr><th >Title</th><th id="genre">Genre</th><th id="director">Director</th></tr>
-    <tr><td id="title"></td><td id="genre"></td><td id="director"></td></tr>
-</table> -->
 <!DOCTYPE html>
 <html>
 
@@ -20,16 +16,19 @@
     <img src="Media/movieIconClipArt.png"></img>
     </div>
     <div class="movieSearch">
-        <form action="#" id="info-search">
+        <form action="#" id="info-search">                
             <div class="search-box">
-                <input type="text" id="user-search" placeholder="Enter movie title to search for" />
-                <button id="film-icon"><i class="fas fa-film"></i></button>
+                <button id="displayAll"><i class="fas fa-file-video"></i></button>
+                <input type="text" id="user-search" placeholder="Search Title/Genre/Director" />
+                <button id="title-icon"><i class="fas fa-camera"></i></button>
+                <button id="genre-icon"><i class="fab fa-artstation"></i></button>
+                <button id="director-icon"><i class="fas fa-film"></i></button>
             </div>
         </form>
         <div class="container" id="info-list">
             <div class="row object-row">
                 <div class='col-3'>
-                    <h3>Id</h3>
+                    <h3>Edit</h3>
                 </div>
                 <div class='col-3'>
                     <h3>Title</h3>
