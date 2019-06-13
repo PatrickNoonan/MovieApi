@@ -18,14 +18,14 @@
     <div class="movieSearch">
         <form action="#" id="info-search">                
             <div class="search-box">
-                <button id="displayAll"><i class="fas fa-file-video"></i></button>
+                <button title="Show all movies" id="displayAll"><i class="fas fa-file-video"></i></button>
                 <input type="text" id="user-search" placeholder="Search Title/Genre/Director" />
-                <button id="title-icon"><i class="fas fa-camera"></i></button>
-                <button id="genre-icon"><i class="fab fa-artstation"></i></button>
-                <button id="director-icon"><i class="fas fa-film"></i></button>
+                <button title="Search by title" id="title-icon"><i class="fas fa-camera"></i></button>
+                <button title="Search by genre" id="genre-icon"><i class="fab fa-artstation"></i></button>
+                <button title="Search by director" id="director-icon"><i class="fas fa-video"></i></button>
             </div>
         </form>
-        <div class="container" id="info-list">
+        <div class="container" id="info">
             <div class="row object-row">
                 <div class='col-3'>
                     <h3></h3>
@@ -41,10 +41,12 @@
                 </div>
             </div>
         </div>
+        <div class="container" id="info-list">
+            </div>
         <div class="container" id="postMethod">
                 <div class="row object-row">
                     <div class='col-3'>
-                        <button id="post-icon"><i class="fas fa-folder-plus"></i></button>
+                        <button title="Add a movie" id="post-icon"><i class="fas fa-folder-plus"></i></button>
                     </div>
                     <div class='col-3'>
                         <input type="text" id="newTitleInput" placeholder="Add Title" />

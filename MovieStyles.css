@@ -7,8 +7,12 @@ body {
     margin-bottom: 50px;
 }
 
-img {
+#movieImageOrLogo {
     height:150px;
+}
+
+img {
+    height:50px;
 }
 
 .info-list {
