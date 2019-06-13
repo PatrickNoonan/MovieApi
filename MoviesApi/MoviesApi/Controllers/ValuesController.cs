@@ -30,33 +30,6 @@ namespace MoviesApi.Controllers
             return Ok(movie);
         }
 
-
-        // details read
-        //[HttpGet]
-        //public IHttpActionResult Get(string option, string userString)
-        //{
-        //    Movies movie = new Movies();
-        //    if (option == "Title")
-        //    {
-        //        movie = db.Movies.First(m => m.Title == userString);
-        //    }
-        //    else if (option == "Genre")
-        //    {
-        //        movie = db.Movies.First(m => m.Genre == userString);
-        //    }
-        //    else if (option == "Director Name")
-        //    {
-        //        movie = db.Movies.First(m => m.DirectorName == userString);
-        //    }
-
-        //    if (movie == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return Ok(movie);
-        //}
-
         // create
         [HttpPost]
         public IHttpActionResult Post([FromBody]Movies newMovie)
@@ -76,40 +49,19 @@ namespace MoviesApi.Controllers
 
         //edit update
         [HttpPut]
-        public IHttpActionResult Put(int id, [FromBody] Movies movies)
-        {            
+        public IHttpActionResult Put(int id, [FromBody]Movies editMovie)
+        {
             Movies movie = db.Movies.Find(id);
-            if (movie == null)
+
+            if (!ModelState.IsValid)
             {
-                return NotFound();
+                return BadRequest("Invalid data.");
             }
-            return Ok(movie);
+            movie.Title = editMovie.Title;
+            movie.Genre = editMovie.Genre;
+            movie.DirectorName = editMovie.DirectorName;
+            db.SaveChanges();
+            return Ok();
         }
-
-        //[HttpPut]
-        //public IHttpActionResult Put([Bind(Include = "Id,firstName,lastName,emailAddress,address,zipCode,weeklyPickupDay,specialOneTimePickup")] Customer customer)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Entry(customer).State = EntityState.Modified;
-        //        string currentId = User.Identity.GetUserId();
-        //        customer.UserId = currentId;
-        //        db.SaveChanges();
-
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View(customer);
-        //}
-
-        //delete
-        //[HttpDelete]
-        //public IHttpActionResult Delete(int id)
-        //{
-        //    Movies movie = db.Movies.Find(id);
-        //    db.Movies.Remove(movie);
-        //    //db.SaveChanges(); is necessary to save?
-
-        //    return Ok();
-        //}
     }
 }
