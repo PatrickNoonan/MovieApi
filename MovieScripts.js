@@ -11,7 +11,7 @@ $(document).ready(function () {
                 console.log(data);
                 $.each(data, function (key, value) {
                     $("#info-list")
-                        .append(`<div class="row object-row"><div class="col-3"><button id="movie-edit"><i class="fas fa-film"></i></button></div>` + "<div class='col-3'>" + value.Title + "</div><div class='col-3'>" + value.Genre + "</div><div class='col-3'>" + value.DirectorName + "</div>")
+                        .append(`<div class="row object-row"><div class="col-4"><img src="${value.Image}"></div><div class="col-2"><button id="movie-edit"><i class="fas fa-film"></i></button></div>` + "<div class='col-2'>" + value.Title + "</div><div class='col-2'>" + value.Genre + "</div><div class='col-2'>" + value.DirectorName + "</div>")
                 })
             });
     });
@@ -31,6 +31,38 @@ $(document).ready(function () {
                         $("#info-list")
                             .append(`<div class="row object-row"><div class="col-3"><button id="add-image"><i class="fas fa-images"></i></button><button id="movie-edit"><i class="fas fa-film"></i></button></div>` + "<div class='col-3'>" + value.Title + "</div><div class='col-3'>" + value.Genre + "</div><div class='col-3'>" + value.DirectorName + "</div>")
 
+                        $("#add-image").on("click", function () {
+                            $("#info-list")
+                            .append(`<div class="row object-row">                                
+                                <div class='col-6'>
+                                    <input type="text" id="newImageInput" placeholder="Image URL" />
+                                </div>
+                                <div class='col-6'>
+                                    <button id="put-icon"><i class="fas fa-edit"></i></button>
+                                </div>
+                            </div>`)
+
+                            $("#put-icon").on("click", function () {
+                                let movieId = value.Id;
+                                let newImageUrl = $("#newImageInput").val();
+                                $.ajax({
+                                    method: "PUT",
+                                    url: "http://localhost:44378/api/values/" + movieId,
+                                    datatype: "JSON",
+                                    data: {
+                                        "Title": value.Title,
+                                        "Genre": value.Genre,
+                                        "DirectorName": value.DirectorName,
+                                        "Image" : newImageUrl
+                                    },
+                                    success: function (data) {
+                                        console.log(data);
+                                    }
+                                })
+                            });
+
+                            //empty logo image and add movie image
+                        });
                         $("#movie-edit").on("click", function () {     //SOLID UP ----------------------------->
                             $("#info-list")
                                 .append(`<div class="row object-row">
@@ -60,7 +92,7 @@ $(document).ready(function () {
                                     data: {
                                         "Title": newTitleInput,
                                         "Genre": newGenreInput,
-                                        "DirectorName": newDirectorInput,
+                                        "DirectorName": newDirectorInput
                                     },
                                     success: function (data) {
                                         console.log(data);

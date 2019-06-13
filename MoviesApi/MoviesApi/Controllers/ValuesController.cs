@@ -60,6 +60,7 @@ namespace MoviesApi.Controllers
             movie.Title = editMovie.Title;
             movie.Genre = editMovie.Genre;
             movie.DirectorName = editMovie.DirectorName;
+            movie.Image = editMovie.Image;
             db.SaveChanges();
 
             return Ok();
