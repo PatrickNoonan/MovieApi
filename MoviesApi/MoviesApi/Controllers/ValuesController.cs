@@ -44,6 +44,7 @@ namespace MoviesApi.Controllers
             movie.DirectorName = newMovie.DirectorName;
             db.Movies.Add(movie);
             db.SaveChanges();
+
             return Ok();
         }
 
@@ -52,7 +53,6 @@ namespace MoviesApi.Controllers
         public IHttpActionResult Put(int id, [FromBody]Movies editMovie)
         {
             Movies movie = db.Movies.Find(id);
-
             if (!ModelState.IsValid)
             {
                 return BadRequest("Invalid data.");
@@ -61,6 +61,7 @@ namespace MoviesApi.Controllers
             movie.Genre = editMovie.Genre;
             movie.DirectorName = editMovie.DirectorName;
             db.SaveChanges();
+
             return Ok();
         }
     }

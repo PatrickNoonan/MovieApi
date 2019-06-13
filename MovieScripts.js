@@ -57,6 +57,7 @@ $(document).ready(function () {
                                 $.ajax({
                                     method: "PUT",
                                     url: "http://localhost:44378/api/values" + movieId,
+                                    datatype: "JSON",
                                     crossDomain: true,
                                     headers: {
                                         "Content-Type": "application/json"
@@ -66,7 +67,6 @@ $(document).ready(function () {
                                         "Genre": newGenreInput,
                                         "DirectorName": newDirectorInput,
                                     }),
-                                    datatype: "json",
                                     success: function (data) {
                                         console.log(data);
                                     }
@@ -127,15 +127,16 @@ $(document).ready(function () {
         $.ajax({
             method: "POST",
             url: "http://localhost:44378/api/values",
+            datatype: "JSON",
             headers: {
                 "Content-Type": "application/json"
             },
+            contentType: "application/json",
             data: JSON.stringify({
                 "Title": newTitleInput,
                 "Genre": newGenreInput,
                 "DirectorName": newDirectorInput,
-            }),
-            datatype: "json",
+            }),            
             success: function (data) {
                 console.log(data);
             }
