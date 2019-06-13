@@ -11,7 +11,6 @@ $(document).ready(function () {
                 console.log(data);
                 $.each(data, function (key, value) {
                     $("#info-list")
-
                         .append(`<div class="row object-row"><div class="col-3"><button id="movie-edit"><i class="fas fa-film"></i></button></div>` + "<div class='col-3'>" + value.Title + "</div><div class='col-3'>" + value.Genre + "</div><div class='col-3'>" + value.DirectorName + "</div>")
                 })
             });
@@ -56,17 +55,13 @@ $(document).ready(function () {
                                 let newDirectorInput = $("#newDirectorInput").val();
                                 $.ajax({
                                     method: "PUT",
-                                    url: "http://localhost:44378/api/values" + movieId,
+                                    url: "http://localhost:44378/api/values/" + movieId,
                                     datatype: "JSON",
-                                    crossDomain: true,
-                                    headers: {
-                                        "Content-Type": "application/json"
-                                    },
-                                    data: JSON.stringify({
+                                    data: {
                                         "Title": newTitleInput,
                                         "Genre": newGenreInput,
                                         "DirectorName": newDirectorInput,
-                                    }),
+                                    },
                                     success: function (data) {
                                         console.log(data);
                                     }
