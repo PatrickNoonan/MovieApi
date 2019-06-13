@@ -1,0 +1,38 @@
+{
+	"id": "6be707d6-0dcb-cd57-d464-c0a0281d0cab",
+	"name": "Movie API",
+	"description": "",
+	"order": [
+		"a2f4413a-0c8f-6928-7ada-e4c73d434faa"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 1560435822979,
+	"owner": "7346900",
+	"public": false,
+	"requests": [
+		{
+			"id": "a2f4413a-0c8f-6928-7ada-e4c73d434faa",
+			"headers": "",
+			"headerData": [],
+			"url": "http://localhost:44378/api/values",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "6be707d6-0dcb-cd57-d464-c0a0281d0cab",
+			"data": null,
+			"dataMode": "params",
+			"name": "http://localhost:44378/api/values",
+			"description": "Requesting all movies in my movie api",
+			"descriptionFormat": "html",
+			"time": 1560436000358,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		}
+	]
+}
