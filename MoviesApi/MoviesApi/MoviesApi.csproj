@@ -284,6 +284,10 @@
     <Compile Include="Migrations\201906112207558_databaseSeed.Designer.cs">
       <DependentUpon>201906112207558_databaseSeed.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906131503222_AddingImageUrl.cs" />
+    <Compile Include="Migrations\201906131503222_AddingImageUrl.Designer.cs">
+      <DependentUpon>201906131503222_AddingImageUrl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -405,6 +409,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906112207558_databaseSeed.resx">
       <DependentUpon>201906112207558_databaseSeed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906131503222_AddingImageUrl.resx">
+      <DependentUpon>201906131503222_AddingImageUrl.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

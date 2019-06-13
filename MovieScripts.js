@@ -29,9 +29,9 @@ $(document).ready(function () {
                 $.each(data, function (key, value) {
                     if (value.Title == searchTitleInput) {
                         $("#info-list")
-                            .append(`<div class="row object-row"><div class="col-3"><button id="movie-edit"><i class="fas fa-film"></i></button></div>` + "<div class='col-3'>" + value.Title + "</div><div class='col-3'>" + value.Genre + "</div><div class='col-3'>" + value.DirectorName + "</div>")
+                            .append(`<div class="row object-row"><div class="col-3"><button id="add-image"><i class="fas fa-images"></i></button><button id="movie-edit"><i class="fas fa-film"></i></button></div>` + "<div class='col-3'>" + value.Title + "</div><div class='col-3'>" + value.Genre + "</div><div class='col-3'>" + value.DirectorName + "</div>")
 
-                        $("#movie-edit").on("click", function () {
+                        $("#movie-edit").on("click", function () {     //SOLID UP ----------------------------->
                             $("#info-list")
                                 .append(`<div class="row object-row">
                                 <div class='col-3'>
@@ -92,6 +92,44 @@ $(document).ready(function () {
                     if (value.Genre == searchGenreInput) {
                         $("#info-list")
                             .append(`<div class="row object-row"><div class="col-3"><button id="movie-edit"><i class="fas fa-film"></i></button></div>` + "<div class='col-3'>" + value.Title + "</div><div class='col-3'>" + value.Genre + "</div><div class='col-3'>" + value.DirectorName + "</div>")
+
+                            $("#movie-edit").on("click", function () {
+                                $("#info-list")
+                                    .append(`<div class="row object-row">
+                                    <div class='col-3'>
+                                        <button id="put-icon"><i class="fas fa-edit"></i></button>
+                                    </div>
+                                    <div class='col-3'>
+                                        <input type="text" id="newTitleInput" placeholder="Edit Title" />
+                                    </div>
+                                    <div class='col-3'>
+                                        <input type="text" id="newGenreInput" placeholder="Edit Genre" />
+                                    </div>
+                                    <div class='col-3'>
+                                        <input type="text" id="newDirectorInput" placeholder="Edit Director" />
+                                    </div>
+                                </div>`)
+                                //PUT METHOD                
+                                $("#put-icon").on("click", function () {
+                                    let movieId = value.Id;
+                                    let newTitleInput = $("#newTitleInput").val();
+                                    let newGenreInput = $("#newGenreInput").val();
+                                    let newDirectorInput = $("#newDirectorInput").val();
+                                    $.ajax({
+                                        method: "PUT",
+                                        url: "http://localhost:44378/api/values/" + movieId,
+                                        datatype: "JSON",
+                                        data: {
+                                            "Title": newTitleInput,
+                                            "Genre": newGenreInput,
+                                            "DirectorName": newDirectorInput,
+                                        },
+                                        success: function (data) {
+                                            console.log(data);
+                                        }
+                                    })
+                                });
+                            });
                     };
                 });
             })
@@ -111,6 +149,44 @@ $(document).ready(function () {
                     if (value.DirectorName == searchDirectorInput) {
                         $("#info-list")
                             .append(`<div class="row object-row"><div class="col-3"><button id="movie-edit"><i class="fas fa-film"></i></button></div>` + "<div class='col-3'>" + value.Title + "</div><div class='col-3'>" + value.Genre + "</div><div class='col-3'>" + value.DirectorName + "</div>")
+
+                            $("#movie-edit").on("click", function () {
+                                $("#info-list")
+                                    .append(`<div class="row object-row">
+                                    <div class='col-3'>
+                                        <button id="put-icon"><i class="fas fa-edit"></i></button>
+                                    </div>
+                                    <div class='col-3'>
+                                        <input type="text" id="newTitleInput" placeholder="Edit Title" />
+                                    </div>
+                                    <div class='col-3'>
+                                        <input type="text" id="newGenreInput" placeholder="Edit Genre" />
+                                    </div>
+                                    <div class='col-3'>
+                                        <input type="text" id="newDirectorInput" placeholder="Edit Director" />
+                                    </div>
+                                </div>`)
+                                //PUT METHOD                
+                                $("#put-icon").on("click", function () {
+                                    let movieId = value.Id;
+                                    let newTitleInput = $("#newTitleInput").val();
+                                    let newGenreInput = $("#newGenreInput").val();
+                                    let newDirectorInput = $("#newDirectorInput").val();
+                                    $.ajax({
+                                        method: "PUT",
+                                        url: "http://localhost:44378/api/values/" + movieId,
+                                        datatype: "JSON",
+                                        data: {
+                                            "Title": newTitleInput,
+                                            "Genre": newGenreInput,
+                                            "DirectorName": newDirectorInput,
+                                        },
+                                        success: function (data) {
+                                            console.log(data);
+                                        }
+                                    })
+                                });
+                            });
                     };
                 });
             })
