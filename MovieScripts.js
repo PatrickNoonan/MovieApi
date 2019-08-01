@@ -1,14 +1,12 @@
 $(document).ready(function () {
     $("#displayAll").on("click", function () {
         $("#info-list").empty();
-
         $.ajax({
             method: "GET",
             url: "http://localhost:44378/api/values",
             dataType: "JSON"
         })
             .done(function (data) {
-                console.log(data);
                 $.each(data, function (key, value) {
                     $("#info-list")
                         .append(`<div class="row object-row"><div class="col-3"><a href="${value.Image}"><img src="${value.Image}"></a></div>` + "<div class='col-3'>" + value.Title + "</div><div class='col-3'>" + value.Genre + "</div><div class='col-3'>" + value.DirectorName + "</div>")
@@ -25,12 +23,10 @@ $(document).ready(function () {
             dataType: "JSON"
         })
             .done(function (data) {
-                console.log(data);
                 $.each(data, function (key, value) {
                     if (value.Title == searchTitleInput) {
                         $("#info-list")
-                            .append(`<button title='Add image' id='add-image'><i class='fas fa-images'></i></button><button title='Edit Movie' id='movie-edit'><i class='fas fa-film'></i></button><div class="row object-row"><div class="col-3"><a target="_blank" href="${value.Image}"><img src="${value.Image}"></a></div>` + "<div class='col-3'>" + value.Title + "</div><div class='col-3'>" + value.Genre + "</div><div class='col-3'>" + value.DirectorName + "</div></div>")
-                            
+                            .append(`<button title='Add image' id='add-image'><i class='fas fa-images'></i></button><button title='Edit Movie' id='movie-edit'><i class='fas fa-film'></i></button><div class="row object-row"><div class="col-3"><a target="_blank" href="${value.Image}"><img src="${value.Image}"></a></div>` + "<div class='col-3'>" + value.Title + "</div><div class='col-3'>" + value.Genre + "</div><div class='col-3'>" + value.DirectorName + "</div></div>")                            
                             
                         $("#add-image").on("click", function () {
                             $("#info-list")
