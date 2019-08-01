@@ -34,15 +34,7 @@ namespace MoviesApi.Controllers
         [HttpPost]
         public IHttpActionResult Post([FromBody]Movies newMovie)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest("Invalid data.");
-            }
-            var movie = new Movies();
-            movie.Title = newMovie.Title;
-            movie.Genre = newMovie.Genre;
-            movie.DirectorName = newMovie.DirectorName;
-            db.Movies.Add(movie);
+            db.Movies.Add(newMovie);
             db.SaveChanges();
 
             return Ok();
