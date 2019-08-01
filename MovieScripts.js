@@ -53,12 +53,9 @@ $(document).ready(function () {
                                         "Image" : newImageUrl
                                     },
                                     success: function (data) {
-                                        console.log(data);
                                     }
                                 })
                             });
-
-                            //empty logo image and add movie image
                         });
                         $("#movie-edit").on("click", function () {    
                             $("#info-list")
@@ -107,17 +104,12 @@ $(document).ready(function () {
     $("#genre-icon").on("click", function () {
         $("#info-list").empty();
         let searchGenreInput = $("#user-search").val();
-
         $.ajax({
             method: "GET",
             url: "http://localhost:44378/api/values",
             dataType: "JSON"
         })
-
             .done(function (data) {
-
-                console.log(data);
-
                 $.each(data, function (key, value) {
                     if (value.Genre == searchGenreInput) {
                         $("#info-list")
@@ -155,7 +147,6 @@ $(document).ready(function () {
                                             "DirectorName": newDirectorInput,
                                         },
                                         success: function (data) {
-                                            console.log(data);
                                         }
                                     })
                                 });
@@ -174,7 +165,6 @@ $(document).ready(function () {
             dataType: "JSON"
         })
             .done(function (data) {
-                console.log(data);
                 $.each(data, function (key, value) {
                     if (value.DirectorName == searchDirectorInput) {
                         $("#info-list")
@@ -212,7 +202,6 @@ $(document).ready(function () {
                                             "DirectorName": newDirectorInput,
                                         },
                                         success: function (data) {
-                                            console.log(data);
                                         }
                                     })
                                 });
@@ -239,7 +228,6 @@ $(document).ready(function () {
                 "DirectorName": newDirectorInput,
             }),            
             success: function (data) {
-                console.log(data);
             }
         })
     });
